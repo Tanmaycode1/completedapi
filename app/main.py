@@ -1,42 +1,46 @@
-# Update the imports section at the top if needed
 from fastapi import FastAPI, HTTPException, BackgroundTasks, File, UploadFile, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any, Tuple
 import logging
 import os
-from .prompts.config import get_prompt_config
+from datetime import datetime, timedelta
 import time
 import json
 import tempfile
 import uuid
-from datetime import datetime, timedelta
-from .core.openai_client import OpenAIClient
-import asyncio
-import cv2
-import numpy as np
-from pdf2image import convert_from_path
-from PIL import Image, ImageEnhance, ImageFilter
-import pytesseract
-import pypdf
 import shutil
 import psutil
 import threading
-from concurrent.futures import ThreadPoolExecutor
+import asyncio
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import gc
+import cv2
+import numpy as np
+from PIL import Image
+import pytesseract
+import pypdf
+from pdf2image import convert_from_path
+import io
+from functools import partial
 
+# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize FastAPI app
 app = FastAPI()
 
-class RequestModel:
-    def __init__(self, body: Any, max_tokens: Optional[int] = 4000, temperature: Optional[float] = 0.7):
-        self.body = body
-        self.max_tokens = max_tokens
-        self.temperature = temperature
-
+# Constants for PDF Processing
+TEMP_DIR = "/tmp/pdf_processing"
+DPI = 300  # Optimized DPI setting
+RESIZE_FACTOR = 1.5  # Optimized resize factor
+CHUNK_SIZE = 3  # Number of pages to process in parallel
+COMPRESSION_QUALITY = 85  # Image compression quality
+MAX_THREADS = min(4, os.cpu_count() or 2)
+SESSION_TIMEOUT = 3600
+MAX_MEMORY_PERCENT = 80
+CLEANUP_INTERVAL = 300
 
 # Add CORS middleware
 app.add_middleware(
@@ -46,31 +50,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-try:
-    openai_client = OpenAIClient("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")
-except Exception as e:
-    logger.error(f"Failed to initialize OpenAI client: {str(e)}")
-    raise
-# Configuration
-TEMP_DIR = "/tmp/pdf_processing"
-DPI = 400  # Higher DPI for better quality
-MAX_THREADS = min(4, os.cpu_count() or 2)
-PDF_QUALITY = 100
-SESSION_TIMEOUT = 3600
-MAX_MEMORY_PERCENT = 80
-CLEANUP_INTERVAL = 300
-
-# OCR Configuration
-TESSERACT_CONFIG = '--oem 3 --psm 6 -c tessedit_char_whitelist="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?@#$%^&*()[]{}/<>\'\":;-_+=~ "'
-MIN_CONFIDENCE = 60
 
 # Storage
 pdf_tasks: Dict[str, Dict] = {}
 active_sessions: Dict[str, datetime] = {}
 session_locks: Dict[str, threading.Lock] = {}
 
-
-# Update the PDFProcessingRequest model
 class PDFProcessingRequest(BaseModel):
     prompt_type: str = Field(
         default="policy_json_conversion",
@@ -103,154 +88,92 @@ class PDFProcessingRequest(BaseModel):
         description="Apply image enhancement for better OCR results"
     )
 
-# Enhanced image processing functions
-async def enhance_image_for_ocr(image: Image.Image) -> Image.Image:
-    """Enhanced image preprocessing for better OCR accuracy"""
-    try:
-        # Convert to numpy array
-        img_np = np.array(image)
-        
-        # Convert to grayscale if needed
-        if len(img_np.shape) == 3:
-            gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
-        else:
-            gray = img_np
-        
-        # Scale up image
-        scale_percent = 200
-        width = int(gray.shape[1] * scale_percent / 100)
-        height = int(gray.shape[0] * scale_percent / 100)
-        scaled = cv2.resize(gray, (width, height), interpolation=cv2.INTER_CUBIC)
-        
-        # Apply adaptive thresholding
-        binary = cv2.adaptiveThreshold(
-            scaled,
-            255,
-            cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-            cv2.THRESH_BINARY,
-            21,
-            11
-        )
-        
-        # Denoise
-        denoised = cv2.fastNlMeansDenoising(binary, None, 10, 7, 21)
-        
-        # Improve contrast
-        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-        contrasted = clahe.apply(denoised)
-        
-        # Remove small noise and connect nearby text
-        kernel = np.ones((2,2), np.uint8)
-        morph = cv2.morphologyEx(contrasted, cv2.MORPH_CLOSE, kernel)
-        
-        # Sharpen edges
-        kernel_sharpen = np.array([[-1,-1,-1],
-                                 [-1, 9,-1],
-                                 [-1,-1,-1]])
-        sharpened = cv2.filter2D(morph, -1, kernel_sharpen)
-        
-        return Image.fromarray(sharpened)
-        
-    except Exception as e:
-        logger.error(f"Error in image enhancement: {str(e)}")
-        return image
-    finally:
-        gc.collect()
+async def optimize_image_for_ocr(image: Image.Image) -> np.ndarray:
+    """Optimized image preprocessing with better performance"""
+    # Convert to numpy array once
+    img_np = np.array(image)
+    
+    # Convert to grayscale if needed (faster check)
+    gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY) if len(img_np.shape) == 3 else img_np
+    
+    # Resize more efficiently
+    height, width = gray.shape
+    new_height = int(height * RESIZE_FACTOR)
+    new_width = int(width * RESIZE_FACTOR)
+    scaled = cv2.resize(gray, (new_width, new_height), interpolation=cv2.INTER_LINEAR)
+    
+    # Apply optimized binary threshold
+    binary = cv2.threshold(scaled, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+    
+    # Quick denoise (faster than Non-local Means)
+    denoised = cv2.medianBlur(binary, 3)
+    
+    return denoised
 
-async def extract_text_from_page(image: Image.Image, lang: str = 'eng') -> str:
-    """Extract text from a single page with multiple processing attempts"""
-    configs = [
-        '--oem 3 --psm 6 -c tessedit_char_blacklist={}[]©®°',
-        '--oem 3 --psm 3 -c tessedit_char_blacklist={}[]©®°',
-        '--oem 3 --psm 1 -c tessedit_char_blacklist={}[]©®°'
-    ]
+def process_page_chunk(chunk: List[Tuple[int, Image.Image]], lang: str) -> List[Tuple[int, str]]:
+    """Process a chunk of pages in parallel"""
+    results = []
     
-    best_text = ""
-    max_confidence = 0
-    
-    enhanced_image = await enhance_image_for_ocr(image)
-    
-    for config in configs:
+    for page_num, image in chunk:
         try:
-            # Get detailed OCR data
-            ocr_data = pytesseract.image_to_data(
-                enhanced_image,
+            # Convert PIL Image to bytes in memory
+            img_byte_arr = io.BytesIO()
+            image.save(img_byte_arr, format='PNG', optimize=True, quality=COMPRESSION_QUALITY)
+            img_byte_arr = img_byte_arr.getvalue()
+            
+            # Convert bytes to numpy array
+            nparr = np.frombuffer(img_byte_arr, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_GRAYSCALE)
+            
+            # Quick image optimization
+            img = cv2.threshold(img, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+            
+            # Use simpler tesseract configuration for speed
+            text = pytesseract.image_to_string(
+                img,
                 lang=lang,
-                config=config,
-                output_type=pytesseract.Output.DICT
+                config='--oem 3 --psm 6'
             )
             
-            # Calculate average confidence of words
-            confidences = [float(conf) for conf in ocr_data['conf'] if conf != '-1']
-            if confidences:
-                avg_confidence = sum(confidences) / len(confidences)
-                
-                if avg_confidence > max_confidence:
-                    # Build text from high-confidence words
-                    text_parts = []
-                    for i, word in enumerate(ocr_data['text']):
-                        if float(ocr_data['conf'][i]) > 60 and word.strip():
-                            text_parts.append(word)
-                    
-                    text = ' '.join(text_parts)
-                    if len(text) > len(best_text):
-                        best_text = text
-                        max_confidence = avg_confidence
-                        
+            results.append((page_num, text))
+            
         except Exception as e:
-            logger.error(f"OCR attempt failed: {str(e)}")
-            continue
+            results.append((page_num, f"Error processing page {page_num}: {str(e)}"))
     
-    return clean_ocr_text(best_text)
+    return results
 
-def clean_ocr_text(text: str) -> str:
-    """Clean OCR text with improved accuracy"""
-    import re
+async def extract_text_from_pages(images: List[Image.Image], lang: str = 'eng') -> List[Tuple[int, str]]:
+    """Extract text from multiple pages using parallel processing"""
+    # Create page chunks for batch processing
+    page_chunks = []
+    current_chunk = []
     
-    # Remove random single characters
-    text = re.sub(r'\b[a-zA-Z]\b(?!\s*[:.,-])', '', text)
+    for i, image in enumerate(images, 1):
+        current_chunk.append((i, image))
+        if len(current_chunk) == CHUNK_SIZE:
+            page_chunks.append(current_chunk)
+            current_chunk = []
     
-    # Remove repeated special characters
-    text = re.sub(r'[-=_.,:;]{2,}', ' ', text)
+    if current_chunk:
+        page_chunks.append(current_chunk)
     
-    # Clean lines
-    lines = []
-    for line in text.split('\n'):
-        line = line.strip()
-        if line:
-            # Calculate ratio of alphanumeric characters
-            alpha_ratio = sum(c.isalnum() or c.isspace() for c in line) / len(line)
-            if alpha_ratio > 0.5:  # Line must be at least 50% alphanumeric
-                lines.append(line)
+    # Process chunks in parallel
+    loop = asyncio.get_event_loop()
+    with ThreadPoolExecutor(max_workers=min(os.cpu_count(), 4)) as executor:
+        futures = []
+        for chunk in page_chunks:
+            future = loop.run_in_executor(
+                executor,
+                partial(process_page_chunk, chunk, lang)
+            )
+            futures.append(future)
+        
+        # Gather results
+        results = []
+        for future in await asyncio.gather(*futures):
+            results.extend(future)
     
-    # Join lines
-    text = '\n'.join(lines)
-    
-    # Fix common OCR errors
-    replacements = {
-        '|': 'I',
-        '{}': '',
-        '[]': '',
-        '()': '',
-        '0}': '0',
-        '{0': '0',
-        'l.': 'I.',
-        '©': 'O',
-        '®': 'R',
-        '°': 'o',
-    }
-    
-    for old, new in replacements.items():
-        text = text.replace(old, new)
-    
-    # Remove garbage characters
-    text = re.sub(r'[^\x00-\x7F]+', '', text)
-    
-    # Fix spacing
-    text = re.sub(r'\s+', ' ', text)
-    text = re.sub(r'\n\s*\n\s*\n', '\n\n', text)
-    
-    return text.strip()
+    return sorted(results, key=lambda x: x[0])
 
 async def process_pdf_content(
     content: bytes,
@@ -261,7 +184,7 @@ async def process_pdf_content(
     max_tokens: Optional[int] = None,
     temperature: Optional[float] = None
 ):
-    """Process PDF content with improved text extraction"""
+    """Optimized PDF processing function"""
     session_dir = os.path.join(TEMP_DIR, session_id)
     temp_path = os.path.join(session_dir, task_id)
     os.makedirs(temp_path, exist_ok=True)
@@ -271,7 +194,7 @@ async def process_pdf_content(
         # Save PDF
         with open(pdf_path, 'wb') as f:
             f.write(content)
-            
+        
         # Try direct text extraction first
         text_content = []
         needs_ocr = True
@@ -279,16 +202,14 @@ async def process_pdf_content(
         try:
             with open(pdf_path, 'rb') as file:
                 pdf_reader = pypdf.PdfReader(file)
-                total_pages = len(pdf_reader.pages)
-                meaningful_pages = 0
+                text_content = []
                 
                 for page_num, page in enumerate(pdf_reader.pages, 1):
-                    page_text = page.extract_text()
-                    if page_text and len(page_text.split()) > 5:
-                        meaningful_pages += 1
-                        text_content.append(f"\nPage {page_num}\n{'='*50}\n\n{page_text}")
+                    text = page.extract_text()
+                    if text and len(text.split()) > 5:
+                        text_content.append(f"\nPage {page_num}\n{'='*50}\n\n{text}")
                 
-                if meaningful_pages >= (total_pages * 0.5):
+                if len(text_content) >= (len(pdf_reader.pages) * 0.5):
                     needs_ocr = False
                     final_text = '\n'.join(text_content)
                     pdf_tasks[task_id].update({
@@ -298,52 +219,48 @@ async def process_pdf_content(
                         'ocr_used': False
                     })
                     return
+                    
         except Exception as e:
             logger.error(f"Direct text extraction failed: {str(e)}")
         
         if needs_ocr:
-            # Convert PDF to images
+            # Convert PDF to images with optimized settings
             images = convert_from_path(
                 pdf_path,
-                dpi=400,
+                dpi=DPI,
                 output_folder=temp_path,
                 fmt='png',
                 grayscale=True,
-                thread_count=MAX_THREADS,
+                thread_count=min(os.cpu_count(), 4),
                 use_pdftocairo=True
             )
             
             total_pages = len(images)
             logger.info(f"Processing {total_pages} pages for task {task_id}")
             
-            text_parts = []
-            text_parts.append(f"Document Information:\nTotal Pages: {total_pages}\n")
+            # Update task with total pages
+            pdf_tasks[task_id].update({
+                'total_pages': total_pages,
+                'pages_processed': 0
+            })
             
-            for page_num, image in enumerate(images, 1):
-                try:
-                    # Update progress
-                    pdf_tasks[task_id].update({
-                        'progress': (page_num / total_pages) * 100,
-                        'current_page': page_num
-                    })
-                    
-                    # Extract and clean text
-                    page_text = await extract_text_from_page(image, ocr_language)
-                    
-                    if page_text.strip():
-                        text_parts.append(f"\nPage {page_num}\n{'='*50}\n")
-                        text_parts.append(page_text)
-                    
-                except Exception as e:
-                    logger.error(f"Error processing page {page_num}: {str(e)}")
-                    text_parts.append(f"\nError processing page {page_num}\n")
-                finally:
-                    image.close()
-                    gc.collect()
+            # Process pages in parallel
+            results = await extract_text_from_pages(images, ocr_language)
             
-            # Combine and clean all text
+            # Combine results
+            text_parts = [f"Document Information:\nTotal Pages: {total_pages}\n"]
+            for page_num, text in results:
+                if text.strip():
+                    text_parts.append(f"\nPage {page_num}\n{'='*50}\n")
+                    text_parts.append(text)
+                
+                # Update progress
+                pdf_tasks[task_id].update({
+                    'progress': (page_num / total_pages) * 100,
+                    'pages_processed': page_num
+                })
+            
             final_text = '\n'.join(text_parts)
-            final_text = clean_ocr_text(final_text)
             
             pdf_tasks[task_id].update({
                 'status': 'completed',
@@ -439,7 +356,6 @@ async def process_pdf(
 
     except Exception as e:
         logger.error(f"Error initiating PDF processing: {str(e)}")
-        # Cleanup any partial session/task data
         if 'session_id' in locals():
             await session_manager.cleanup_session(session_id)
         raise HTTPException(status_code=500, detail=str(e))
@@ -489,6 +405,7 @@ async def get_pdf_status(task_id: str):
         })
     
     return response
+
 
 class SessionManager:
     def __init__(self):

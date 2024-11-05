@@ -95,5 +95,5 @@ def test_pdf_processing(pdf_path: str, api_base_url: str = "http://localhost:800
 
 if __name__ == "__main__":
     # Example usage
-    pdf_file_path = "normal.pdf"  # Replace with your PDF path
+    pdf_file_path = "scanned.pdf"  # Replace with your PDF path
     test_pdf_processing(pdf_file_path)

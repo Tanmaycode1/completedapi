@@ -1,0 +1,380 @@
+Document Information:
+Total Pages: 8
+
+
+Page 1
+==================================================
+
+Sex: M
+Visit date:
+Ambulatory Notes/Results
+Visit Summary
+Reason for Visit
+Follow-up
+Diagnoses
+Codes Comments
+Malignant neoplasm of siqmoid colon (HCC) - Primary C18.7
+Aphasia R47.01
+Cerebrovascular accident (CVA) due to stenosis of left carotid 163.232
+artery (HCC)
+Hemiparesis affecting dominant side as late effect of stroke 169.359
+(HCC)
+Malignant neoplasm of colon, unspecified part of colon (HCC) C18.9
+Vital Signs - Last Recorded Most recent update: NS 11:06 AM
+BP Pulse Temp Resp Wt
+115/70 (BP 50 36.6 °C (97.8 °F) 20 87.1 kg (192 Ib)
+Location: LUE, (Skin probe)
+BP Position:
+sitting, BP Cuff
+Size: Reg)
+SpO2 BMI Smoking Status
+96% 26.04 kg/m? Former Smoker
+Progress Notes
+eee = ee 11:15 AM
+Author Type: Physician Status: Signed
+DIAGNOSIS:
+1. Adenocarcinoma of the sigmoid colon s/p robotic assisted low anterior resection, J Pretreatment
+CEA 3.7)
+2. pT3, pN1a, M1, G2, RO.
+3. Liver metastasis s/p CT-guided liver biopsy,
+GENOMIC DATA:
+NGS-CARIS, HER2 negative, MMR-p, PD-L1 negatve, NTRK1/2/3 Negative, BRAF fusion not detected.
+SECONDARY DIAGNOSIS:
+1. CVA with aphasia/hemiparesis
+2. Right intertrochanteric hip fracture status post short cephalomedullary implant, ay
+Generated on J 8:26 AM Page 1
+
+
+Page 2
+==================================================
+
+Visit date:
+Ambulatory Notes/Results
+Progress Notes (continued)
+PO at 11:15 AM (continued)
+INTERVAL HISTORY:
+Patient is a 78 years old elderly gentleman with past medical history of coronary artery disease, polymyalgia
+rheumatica, expressive aphasia/right hemiparesis from previous CVA. Patient required hospitalization on
+GE after a fall with a right intratrochanteric hip fracture. Patient was also found to have anemia and some
+rectal bleed. Initially patient was seen by i on (J day prior to this hip surgery, and
+advised colonoscopy down the road. Patient underwent short cephalomedullary implant, for right
+intertrochanteric hip fracture. Patient was discharged on ae 6h Eliquis.
+Subsequently patient was found to have bright red blood per rectum as well as coffee-ground loose stool.
+Patient was readmitted on On (I EGD was normal. On J patient underwent
+colonoscopy with which revealed rectosigmoid mass and the pathology came back as
+adenocarcinoma, grade 1-2, p-MMR. Pre surgery CEA was 3.7.
+CT abdomen pelvis with contrast, J revealed possible mass in the sigmoid colon. Hypodense lesion
+in the right hepatic lobe measuring 1.2 cm. CT chest with contrast on J essentially negative. On
+GE MRI of the abdomen with and without contrast revealed, there are several small lesions in the liver
+favoring cyst. There is a hepatic lesion in segment 6 of the liver characteristic strongly favor focus of metastatic
+deposit.
+On patient underwent robotic assisted low anterior resection with robotic splenic flexure mobilization
+by . Tumor was identified in the sigmoid colon above the peritoneum. Intraoperatively, the liver
+lesion was not identified on the surface. Path number S21—7773, grade 2 colonic adenocarcinoma measuring
+5.5 cm, tumor invades into the pericolonic soft tissue. No lymphovascular or perineural invasion identified. All
+resection margins including radial, proximal and distal were not involved. 22 lymph nodes were removed and
+one was positive for metastatic deposit. The tumor arising within the tubulovillous adenoma with high-grade
+dysplasia., pT3 Nia MX G2 RO.
+On patient underwent CT-guided core biopsy of the liver mass. Pathology came back metastatic
+adenocarcinoma, morphology consistent with metastatic colorectal adenocarcinoma.
+Final stage,pT3 Nia M1 G2 RO.
+Patient was subsequently transferred to nursing home on
+Patient underwent PET CT scan on a @ PET scan revealed no significant FDG
+avidity in the anastomotic site. The biopsy-proven metastatic to the hepatic segment 6 also lacks FDG avidity.
+There is no regional or distant lymphadenopathy or solid organ or osseous metastasis.
+NGS-CARIS, HER2 negative, MMR-p, PD-L1 negatve, NTRK1/2/3 Negative, BRAF fusion not detected.
+In the office today his questionnaires are reviewed.
+ONCOLOGY HISTORY:
+1 # Patient is a 78 years old elderly gentleman with past medical history of coronary artery disease,
+polymyalgia rheumatica, expressive aphasia/right hemiparesis from previous CVA.
+2 # Patient required hospitalization on J after a fall with a right intratrochanteric hip fracture. Patient
+was also found to have anemia and some rectal bleed. Initially patient was seen by i on
+GE day prior to this hip surgery, and advised colonoscopy down the road.
+3 # Patient underwent short cephalomedullary implant, for right intertrochanteric hip fracture.
+Patient was discharged on as & on Eliquis.
+4 # Subsequently patient was found to have bright red blood per rectum as well as coffee-ground loose stool.
+Patient was readmitted on
+Generated on J 8:26 AM Page 2
+
+
+Page 3
+==================================================
+
+Sex: M
+
+Visit date:
+Ambulatory Notes/Results
+Progress Notes (continued)
+PO at 11:15 AM (continued)
+5 # On J EGD was normal.
+6 # On RM patient underwent colonoscopy with J which revealed rectosigmoid mass and the
+pathology came back as adenocarcinoma, grade 1-2, p-MMR. Pre surgery CEA was 3.7.
+7 # CT abdomen pelvis with contrast, JJ revealed possible mass in the sigmoid colon. Hypodense
+lesion in the right hepatic lobe measuring 1.2 cm.
+8 #CT chest with contrast on J essentially negative.
+9 # On J MRI of the abdomen with and without contrast revealed, there are several small lesions in
+the liver favoring cyst. There is a hepatic lesion in segment 6 of the liver characteristic strongly favor focus of
+metastatic deposit.
+10#0On patient underwent robotic assisted low anterior resection with robotic splenic flexure
+mobilization by . Tumor was identified in the sigmoid colon above the peritoneum. Intraoperatively,
+the liver lesion was not identified on the surface.
+11 # Path number S21-—7773, grade 2 colonic adenocarcinoma measuring 5.5 cm, tumor invades into the
+pericolonic soft tissue. No lymphovascular or perineural invasion identified. All resection margins including
+radial, proximal and distal were not involved. 22 lymph nodes were removed and one was positive for
+metastatic deposit. The tumor arising within the tubulovillous adenoma with high-grade dysplasia., pT3 Nia MO
+G2 RO.
+12 # On J patient underwent CT-guided core biopsy of the liver mass. Pathology came back
+metastatic adenocarcinoma, morphology consistent with metastatic colorectal adenocarcinoma.
+13 # Final stage, pT3 pN1a M1 G2 RO.
+14 #PET CT scan on i @ ER «PET scan revealed no significant FDG avidity in the
+anastomotic site. The biopsy-proven metastatic to the hepatic segment 6 also lacks FDG avidity. There is no
+regional or distant lymphadenopathy or solid organ or osseous metastasis.
+15 # NGS-CARIS, HER2 negative, MMR-p, PD-L1 negatve, NTRK1/2/3 Negative, BRAF fusion not detected.
+(not enough tissue)
+ALLERGIES:
+No Known Allergies
+CURRENT MEDICATIONS:
+Current Outpatient Medications:
+* acetaminophen (TYLENOL ARTHRITIS) 650 MG CR tablet, Take 1,300 mg by mouth every 8 (eight) hours
+as needed for Pain. , Disp: , Rfl:
+* atorvastatin (LIPITOR) 40 MG tablet, Take 1 tablet by mouth daily., Disp: 30 tablet, Rfl: 0
+* calcium-vitamin D (OSCAL-500) 500-200 MG-UNIT per tablet, Take 1 tablet by mouth 3 (three) times daily.,
+Generated on J 8:26 AM Page 3
+
+
+Page 4
+==================================================
+
+Visit date:
+Ambulatory Notes/Results
+Progress Notes (continued)
+PO at 11:15 AM (continued)
+Disp: , Rfl:
+« FLUoxetine (PROZAC) 20 MG capsule, TAKE 1 CAPSULE BY MOUTH DAILY., Disp: 90 capsule, Rfl: 3
+* tamsulosin HCI (FLOMAX) 0.4 MG capsule, TAKE 1 CAPSULE BY MOUTH EVERY DAY, Disp: 90 capsule,
+Rfl: 3
+PAST MEDICAL HISTORY:
+The patient has a past medical history of Generalized osteoarthrosis, involving multiple sites, High cholesterol,
+Polymyalgia rheumatica (HCC), Pure hypercholesterolemia, and Stroke (HCC) (2015). Expressive aphasia
+and right hemiparesis from previous CVA.
+PAST SURGICAL HISTORY:
+The patient has a past surgical history that includes Other surgical history; Other surgical history; Other
+surgical history; Other surgical history; Other surgical history; Other surgical history; Fracture surgery;
+Thromboendarterectomy; and Carpal tunnel release (12/2016).
+FAMILY HISTORY:
+family history includes Heart disease in his father and mother; Stroke in his mother.
+SOCIAL HISTORY:
+The patient reports that he quit smoking about 32 years ago. He has a 15.00 pack-year smoking history. He
+has never used smokeless tobacco. He reports that he does not drink alcohol and does not use drugs.
+ONCOLOGY REVIEW OF SYSTEMS
+Pain - 0
+Nausea/Vomiting - 0
+Fatigue/Tiredness - 0
+Loss of Appetite - 0
+Constipation - 0
+Diarrhea - 0
+Mouth Sores - 0
+Numbness/Tingling - 0
+Distress/Stress - 0
+Quality of life: Good/2
+ECOG Status: 2
+REVIEW OF SYSTEMS:
+CONSTITUTIONAL: Denies any fever, chills, night sweats, or any weight loss.
+HEENT: Denies any headache, vertigo, dizziness, diplopia, photophobia, sore throat, difficulty in swallowing.
+RESPIRATORY: Denies any cough, sputum production, hemoptysis.
+CARDIOVASCULAR: Denies any chest pain, orthopnea, PND.
+Gl: Denies any nausea, vomiting, constipation, diarrhea, hematochezia, or melena.
+GU: Denies any frequency, urgency, dysuria, hematuria, or flank pain.
+MUSCULOSKELETAL: No bony pain.
+CNS: Denies seizure activity. History of CVA with right hemiparesis and expressive aphasia.
+PHYSICAL EXAMINTION:
+BP 115/70 (BP Location: LUE, BP Position: sitting, BP Cuff Size: Reg) | Pulse 50 | Temp 36.6 °C (97.8 °F)
+(Skin probe) | Resp 20 | Wt 87.1 kg (192 Ib) | SpO2 96% | BMI 26.04 kg/m?
+Generated on J 8:26 AM Page 4
+
+
+Page 5
+==================================================
+
+Visit date:
+Ambulatory Notes/Results
+Progress Notes (continued)
+PO at i 11:15 AM (continued)
+GENERAL: The patient is a 78 y.o. female.
+SKIN: Warm and moist. No bruises, ecchymosis, or any petechiae.
+HEAD: Normocephalic, atraumatic.
+EYES: PERRLA. EOM full. Conjunctivae pink. Sclerae anicteric.
+OROPHARYNGEAL EXAM: Unremarkable for any mucositis or thrush.
+NECK: Supple without any JVD, bruit, or thyromegaly.
+LYMPHATIC SYSTEM: No palpable lymphadenopathy in cervical, supraclavicular, infraclavicular, axillary, or
+inguinal areas.
+RESPIRATORY: Chest is clear to percussion and auscultation.
+CARDIOVASCULAR: Unremarkable for any gallop or murmur.
+ABDOMEN: Soft, nontender, without any organomegaly. Bowel sounds are positive.
+EXTREMITIES: No cyanosis, clubbing, or edema.
+CNS exam: The patient is alert and oriented x 3. Cranial nerves are grossly intact. Expressive aphasia. Right
+hemiparesis.
+MUSCULOSKELETAL: Unremarkable for any point tenderness.
+LABS:
+Lab Results
+Component Value Date
+WBC 5.4
+RBC 4.18 (L)
+HGB 13.1 (L)
+HCT 42.6
+MCV 101.9 (H)
+MCH 31.3
+MCHC 30.8 (L)
+RDW 13.9
+PLT 236
+MPV 9.6
+LYMPHS 1.5
+EOSABS 0.4
+BASOSABS 0.0
+Lab Results
+Component Value Date
+GLU 72
+GLUF 84
+Lab Results
+Component Value Date
+BUN 25
+CREAT 1.4
+CREATININE 1.4
+GFREST 47 (L)
+Lab Results
+Component Value Date
+Generated on J 8:26 AM Page 5
+
+
+Page 6
+==================================================
+
+Visit date:
+
+Ambulatory Notes/Results
+Progress Notes (continued)
+PO at i 11:15 AM (continued)
+
+CA 10.1
+
+AST 13
+
+BILITOT 0.4
+
+ALT 13
+
+ALBUMIN 3.7
+
+ALKPHOS 88
+
+PROT 7.7
+
+NA 141
+
+K 4.1
+
+CL 101
+
+CO2 28.5
+lron Study
+Lab Results
+Component Value Date
+
+IRON 39 (L)
+
+TRANSFERRIN 204
+
+TIBC 255 (L)
+
+IRONSAT 15.3
+Lab Results
+Component Value Date
+
+VITB12BL 801 PY
+Lab Results
+Component Value Date
+
+FOLATE 7.5 PF
+Lab Results
+Component Value Date
+
+CEA 3.4 |
+NGS-CARIS, HER2 negative, MMR-p, PD-L1 negatve, NTRK1/2/3 Negative, BRAF fusion not detected.
+ASSESSMENT AND PLAN:
+Patient is an elderly gentleman with the multiple comorbidities and compromised performance status due to
+previous CVA and recent right hip fracture. Patient has multiple issues.
+1. pT3, pN1a, M1, G2, RO with CEA 3.7. Patient initially presented after a GI bleed while on Eliquis.
+Colonoscopy with biopsy confirmed a mass in the rectosigmoid area. Metastatic work-up revealed liver lesion
+and multiple bilateral hepatic cysts. Patient underwent low anterior resection on J Intraoperatively no
+liver lesion was identified on the hepatic surface. It was staged as T3 N1aMX. Subsequently patient
+underwent CT-guided biopsy of the suspicious liver lesion which confirmed metastatic deposit. Patient has
+metastatic colorectal carcinoma with liver only disease.
+Patient underwent PET CT scan on i @ EY =P ET scan revealed no significant FDG
+avidity in the anastomotic site. The biopsy-proven metastatic to the hepatic segment 6 also lacks FDG avidity.
+There is no regional or distant lymphadenopathy or solid organ or osseous metastasis.
+NGS-CARIS, HER2 negative, MMR-p, PD-L1 negatve, NTRK1/2/3 Negative, BRAF fusion not detected.
+Generated on J 8:26 AM Page 6
+
+
+Page 7
+==================================================
+
+Sex: M
+Visit date:
+
+Ambulatory Notes/Results
+Progress Notes (continued)
+PO at 11:15 AM (continued)
+Apparently there was not enough tissue to do the complete NGS panel.
+Overall patient has low disease burden with isolated liver lesion only. PET scan was read out negative. Liver
+lesion can be treated with liver directed therapy like radiofrequency ablation or microwave ablation. Given the
+patient's compromised performance status with multiple comorbidities, we are not sure if liver resection would
+be an ideal therapy.
+Patient will clearly need systemic therapy. | believe we would recommend a systemic therapy then follow-up
+with the liver directed therapy. Initial biopsy shows MMR proficient. NGS-CARIS, HER2 negative, MMR-p,
+PD-L1 negatve, NTRK1/2/3 Negative, BRAF fusion not detected. Apparently there was not enough tissue to
+do the complete NGS panel.
+Recommending systemic chemotherapy with modified FOLFOX plus minus bevacizumab. In the meantime |
+will try to get proper NGS panel on: Specimen. We should have plenty of tissue to run NGS panel.
+Unfortunately liver biopsy did not have enough tissue to run the complete NGS panel. It may change the
+treatment plan down the road. So far we are recommending initiation of systemic chemotherapy with modified
+FOLFOX plus minus bevacizumab. Rationale, risk, benefit and side effects were reviewed. We are also
+recommending Infuse-a-Port placement.
+We will refer him back to J for the consideration of port placement.
+Patient will come back to see me in couple of weeks.
+2. Anemia. There is an evidence of iron deficiency. Folate is also low normal. May consider intravenous iron
+infusion. Also initiate folic acid 1 mg daily.
+3. Right intertrochanteric hip fracture status post short cephalomedullary implant, i Patient is
+following orthopedics.
+| had a very detailed and comprehensive discussion with the patient and family. Our discussion lasted more
+than an hour today.
+Please send a copy to
+
+Electronically signed by i on HI 9:26 PM
+History & Physicals
+
+No notes of this type exist for this encounter.
+Telephone Encounter
+Reason for Call
+
+Follow-up
+All Results
+Generated on J 8:26 AM Page 7
+
+
+Page 8
+==================================================
+
+Sex: M
+Visit date:
+Ambulatory Notes/Results
+All Results (continued)
+No results found
+Your Updated Medication List
+© Accurate as of ES «11:59 PM. Always use your most recent med list.
+acetaminophen 650 MG CR tablet
+Commonly known as: TYLENOL ARTHRITIS
+calcium-vitamin D 500-200 MG-UNIT per tablet
+Commonly known as: OSCAL-500
+END OF REPORT
+Generated on J 8:26 AM Page 8
